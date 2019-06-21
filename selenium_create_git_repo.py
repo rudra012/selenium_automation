@@ -1,12 +1,15 @@
 # Selenium script to create new github repo
+import sys
 from selenium import webdriver
 
 browser = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver')
 
 
 def git_hub_login():
+    # GitHub credentials
     username = ''
     password = ''
+
     browser.get('https://github.com/login')
 
     email_button = browser.find_element_by_id('login_field')
@@ -28,6 +31,11 @@ def create_repo(name):
     python_button.submit()
 
 
-git_hub_login()
-create_repo('test0')
-browser.quit()
+if __name__ == "__main__":
+    # GitHub repo name
+    # print(sys.argv)
+    # repo_name = 'test'
+    repo_name = sys.argv[1]
+    git_hub_login()
+    create_repo(repo_name)
+    browser.quit()
